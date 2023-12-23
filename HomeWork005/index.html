@@ -1,0 +1,50 @@
+<!-- Задача
+
+    // Необходимо получить список всех пользователей с помощью бесплатного API (https://jsonplaceholder.typicode.com/users) и отобразить их на странице. Пользователь должен иметь возможность удалить любого пользователя из списка. -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>List of Users</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <h1>Список пользователей:</h1>
+    <ul id="users"></ul>
+    <button id="removeUser">Удалить пользователя</button>
+    <script>
+        $(document).ready(function () {
+            // Получить список пользователей из API
+            $.getJSON("https://jsonplaceholder.typicode.com/users", function (data) {
+                // Пройтись по пользователям и добавьте их в список
+                for (var i = 0; i < data.length; i++) {
+                    var user = data[i];
+                    var li = "<li>" + user.name + "</li>";
+                    $('#users').append(li);
+                }
+            });
+
+            // Обработать событие щелчка для кнопки "удалить пользователя"
+            $('#removeUser').click(function () {
+                // Получить выбранного пользователя из списка
+                var selectedUser = $('#users li:last-child');
+
+                // Удалить выбранного пользователя из списка
+                selectedUser.remove();
+            });
+        });
+    </script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
